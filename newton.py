@@ -37,3 +37,8 @@ def optimize(x0, func, eps=0.1):
         x0 = x  # Iterate x
 
     return x0
+
+
+
+
+##hello world
