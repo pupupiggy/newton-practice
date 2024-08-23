@@ -1,4 +1,4 @@
-def optimize(x0, func, eps=0.1):
+def optimize(x0, func, eps=0.001):
     """
     Newton’s method for optimization
 
@@ -8,6 +8,7 @@ def optimize(x0, func, eps=0.1):
     """
 
     epsilon = 1
+    iter=0
 
     def derivative(f, x, e=0.01):
         """
@@ -29,11 +30,12 @@ def optimize(x0, func, eps=0.1):
         """
         return (derivative(f, x + e, e) - derivative(f, x, e)) / e
 
-    while epsilon > eps:  # Stop loop when epsilon is very small
+    while epsilon > eps and iter<10000:  # Stop loop when epsilon is very small
         x = x0 - derivative(func, x0, e=0.01) / second_der(
             func, x0, e=0.01
         )  # Calculate new x
         epsilon = abs(x - x0)  # Calculate delta (use abs to ensure positive value)
         x0 = x  # Iterate x
+        iter+=1
 
-    return x0
+    return {"x":x0,"value":func(x0)}
